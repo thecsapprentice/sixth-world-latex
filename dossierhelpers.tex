@@ -1,0 +1,324 @@
+
+\newcommand\Mybox[1]{%
+  \setlength\fboxsep{0pt}\fcolorbox{red}{white}{#1}%
+}
+
+
+\newsavebox{\statBox}
+\savebox{\statBox}
+  (25,25)[bl]{
+     \multiput(0,0)(0,25){2}
+    {\line(1,0){25}}
+  \multiput(0,0)(25,0){2}
+    {\line(0,1){25}}
+  \put(20,20){\line(1,0){5}}
+  \put(20,20){\line(0,1){5}}
+  \put(0,15){\line(1,1){10}}
+}
+
+\newsavebox{\statBoxInf}
+\savebox{\statBoxInf}
+  (25,25)[bl]{
+     \multiput(0,0)(0,25){2}
+    {\line(1,0){25}}
+  \multiput(0,0)(25,0){2}
+    {\line(0,1){25}}
+  \put(20,20){\line(1,0){5}}
+  \put(20,20){\line(0,1){5}}
+}
+
+\newsavebox{\statBoxPlain}
+\savebox{\statBoxPlain}
+  (25,25)[bl]{
+     \multiput(0,0)(0,25){2}
+    {\line(1,0){25}}
+  \multiput(0,0)(25,0){2}
+    {\line(0,1){25}}
+}
+
+\newsavebox{\accumBox}
+\savebox{\accumBox}
+  (10,10)[bl]{
+\multiput(0,0)(0,10){2}
+    {\line(1,0){10}}
+  \multiput(0,0)(10,0){2}
+    {\line(0,1){10}}
+}
+
+\newsavebox{\accumBoxT}
+\savebox{\accumBoxT}
+  (12,12)[bl]{
+\linethickness{2pt}
+\multiput(0,0)(0,10){2}
+    {\line(1,0){12}}
+  \multiput(1,0)(10,0){2}
+    {\line(0,1){11}}
+}
+
+
+\newcommand{\selectedMove}[1]{{\fatefont{}B} \textbf{#1}}
+\newcommand{\unselectedMove}[1]{{\fatefont{}b} \textbf{#1}}
+
+
+%\floatstyle{boxed}
+\newfloat{dossier}{t}{dos}
+\floatname{dossier}{Dossier}
+
+\def\vrulefill{\leavevmode\leaders\vrule width 2pt\vfill\kern\z@}
+
+\titleformat{\section}[block]
+{\orbitronfont\fontsize{1.2cm}{1em}\selectfont\bfseries\filright#1}{}{0pt}{}[\vspace{0ex}\titlerule]
+
+\titleformat{\subsection}[block]
+{\orbitronfont\fontsize{.7cm}{1em}\selectfont\bfseries\filright#1}{}{0pt}{}[\vspace{0ex}\titlerule]
+
+\titleformat{name=\subsubsection}[block]{\orbitronfont\fontsize{.5cm}{1em}\selectfont\bfseries\filright}{}{0em}{\underline{\MakeUppercase{#1}}}
+
+\titleformat{name=\paragraph}[block]{\orbitronfont\fontsize{.45cm}{1em}\selectfont\bfseries\filright}{}{0em}{\MakeUppercase{#1}}
+
+\titlespacing{\paragraph}{%
+  0pt}{%              left margin
+  1\baselineskip}{% space before (vertical)
+  .5em}%  
+
+\newcommand{\LeftBlockEntry}[2]{                     % Same as \EducationEntry
+  \noindent
+  \colorbox{Black}{
+    \parbox[c][.64cm]{#1}{\color{White}{\orbitronfont\fontsize{18pt}{1em}\bfseries\selectfont
+        {\raggedright{} #2}}}
+}}
+\newcommand{\CenterBlockEntry}[2]{                     % Same as \EducationEntry
+  \noindent
+  \colorbox{Black}{
+    \parbox[c][.64cm]{#1}{\color{White}{\orbitronfont\fontsize{18pt}{1em}\bfseries\selectfont
+        {\centering{#2}}}}
+}}
+
+\newsavebox{\dossierboxhelper}
+\newenvironment{dossierbox}[3]
+{
+\begin{lrbox}{\dossierboxhelper}
+\begin{minipage}[t][#2]{#1}
+\CenterBlockEntry{#1}{#3}
+\vspace{.1cm}
+}
+{
+\end{minipage}
+\end{lrbox}
+\usebox{\dossierboxhelper}
+}
+
+\newenvironment{moveoptions}
+{
+\vspace{-.3cm}
+\begin{adjustwidth*}{.5cm}{.5cm}
+\setlength{\parskip}{.1cm}
+\begin{multicols}{2}
+}
+{
+\end{multicols}
+\end{adjustwidth*}
+\vspace{-.3cm}
+}
+
+\newcommand{\moveoption}[1]{\parbox{\linewidth}{\tcirc{} #1}}
+
+\newsavebox{\dossierstatbarbox}
+\newcommand{\dossierstatbar}[1]{
+\begin{lrbox}{\dossierstatbarbox}
+\begin{minipage}[b][\textheight][t]{.215\textwidth}
+\begin{dossierbox}{5.2cm}{5cm}{#1}
+\begin{tabular}{|>{\oswaldfont\fontsize{15pt}{1em}\selectfont\bfseries}m{1.8cm}|m{2.9cm}|}
+\hline
+Street Name& \\[.25cm]\hline
+Real Name&  \\[.25cm]\hline
+Metatype&  \\[.25cm]\hline
+Look&  \\[1cm]
+\hline
+\end{tabular}
+\end{dossierbox}
+\begin{dossierbox}{5.2cm}{6.5cm}{STATS}
+\begin{picture}(5cm,5cm)
+\put( 0cm,4cm){\usebox{\statBox}}
+\put( 1cm,4.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Sluggish}
+\put( 1cm,4.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Awareness }
+\put( 0cm, 3cm){\usebox{\statBox}}
+\put( 1cm,3.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Shaky}
+\put( 1cm,3.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Combat }
+\put( 0cm,2cm){\usebox{\statBox}}
+\put( 1cm,2.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Fragile}
+\put( 1cm,2.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Stamina }
+\put( 0cm,1cm){\usebox{\statBox}}
+\put( 1cm,1.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Dazed}
+\put( 1cm,1.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Craft }
+\put( 0cm,0cm){\usebox{\statBox}}
+\put( 1cm,.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Disfigured}
+\put( 1cm,0.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Presence }
+\put( 3cm,4cm){\usebox{\statBoxInf}}
+\put( 4cm,4.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Dulled}
+\put( 4cm,4.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Edge }
+\put( 3cm,3cm){\usebox{\statBoxInf}}
+\put( 4cm,3.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Faded}
+\put( 4cm,3.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Essence }
+\put( 3cm,2cm){\usebox{\statBoxPlain}}
+\put( 4cm,2.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Armor }
+\end{picture}
+\end{dossierbox}
+\begin{dossierbox}{5.2cm}{3cm}{DAMAGE}
+\begin{picture}(5cm,1.1cm)
+\multiput(1.25cm,0.6cm)(15,0){7}{\usebox{\accumBox}}
+\put(4.95cm,0.6cm){\usebox{\accumBoxT}}
+\put(3.25cm,.14cm){\line(0,1){6}}
+\put(3.25cm,0.35cm){\line(1,0){52}}
+\put(5.08cm,0.35cm){\line(0,1){6}}
+\put(3.35cm, 0cm){\oswaldfont\fontsize{12pt}{1em}\selectfont\bfseries GUT CHECK }
+\end{picture}
+\end{dossierbox}
+\begin{dossierbox}{5.2cm}{3cm}{XP}
+\begin{picture}(5cm,1.1cm)
+\multiput(0.2cm,0.6cm)(15,0){9}{\usebox{\accumBox}}
+\put(4.95cm,0.6cm){\usebox{\accumBoxT}}
+\put(3.25cm,.14cm){\line(0,1){6}}
+\put(3.25cm,0.35cm){\line(1,0){52}}
+\put(5.08cm,0.35cm){\line(0,1){6}}
+\put(3.35cm, 0cm){\oswaldfont\fontsize{12pt}{1em}\selectfont\bfseries ADVANCE }
+\end{picture}
+\end{dossierbox}
+\end{minipage}%
+\end{lrbox}
+\usebox{\dossierstatbarbox}
+}
+
+\newsavebox{\dossiermovebarbox}
+\newenvironment{dossiermovebar}
+{
+\begin{lrbox}{\dossiermovebarbox}
+\begin{minipage}[b][\textheight][t]{0.50\linewidth}
+\begin{dossierbox}{17.6cm}{14cm}{ARCHETYPE MOVES}
+}
+{
+\vspace{.2cm}
+\end{dossierbox}%
+\begin{dossierbox}{17.6cm}{3cm}{WEAPONS}
+\begin{adjustwidth*}{0cm}{.2cm}
+\vspace{-.1cm}
+\begin{tabu}{p{5cm}p{1.5cm}p{1.5cm}p{5cm}p{3cm}}
+\rowfont{\oswaldfont\fontsize{16pt}{0em}\selectfont} Weapon & Range & Damage & Ammo & Tags\\
+\end{tabu}
+
+\vspace{.2cm}
+\setlength{\baselineskip}{.5cm}
+\underline{\hspace{17.9cm}}
+
+\underline{\hspace{17.9cm}}
+
+\underline{\hspace{17.9cm}}
+
+\underline{\hspace{17.9cm}}
+
+\end{adjustwidth*}
+\end{dossierbox}
+\end{minipage}%
+\end{lrbox}
+\usebox{\dossiermovebarbox}
+}
+
+
+\newsavebox{\dossierrightbarbox}
+\newcommand{\dossierrightbar}[1]{
+\begin{lrbox}{\dossierrightbarbox}
+\ifthenelse{ \equal{#1}{standard} }{
+\begin{minipage}[b][\textheight][t]{0.215\linewidth}
+\begin{dossierbox}{5.2cm}{3cm}{DEBTS \& FAVORS}
+\begin{adjustwidth*}{0cm}{.2cm}
+\fontsize{9pt}{1em}\selectfont
+
+\underline{\hspace{3cm}} taught me a valuable lesson in
+self-control.
+
+\underline{\hspace{3cm}} helped me find my place here in the
+shadows.
+
+I killed someone for \underline{\hspace{3cm}}.
+
+I taught \underline{\hspace{3cm}} secrets normally reserved
+for the masters.
+\end{adjustwidth*}
+\vspace{.5cm}
+\end{dossierbox}% 
+\begin{dossierbox}{5.2cm}{3cm}{ARMOR}
+\begin{adjustwidth*}{0cm}{.2cm}
+\vspace{-.2cm}
+{\oswaldfont\fontsize{14pt}{0em}\selectfont Type \hspace{2.6cm} Armor Value }
+\vspace{.2cm}
+\underline{\hspace{5cm}}
+\end{adjustwidth*}
+\end{dossierbox}%
+\begin{dossierbox}{5.2cm}{3cm}{GEAR}
+\begin{adjustwidth*}{0cm}{.2cm}
+\vspace{.2cm}
+\setlength{\baselineskip}{.5cm}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\underline{\hspace{5cm}}
+\end{adjustwidth*}
+\end{dossierbox}%
+\end{minipage}
+}{
+  This is false.
+}
+\end{lrbox}
+\usebox{\dossierrightbarbox}}
+
+
+
+\newcommand{\dossiervehiclebox}{
+\begin{dossierbox}{6.9cm}{7cm}{VEHICLE / DRONE }
+\begin{tabular}{p{2cm}p{2cm}p{2cm}}
+\multicolumn{3}{l}{Name:} \\[.15cm] \hline
+\multicolumn{3}{l}{Type:} \\[.15cm] \hline
+\multicolumn{3}{l}{Tags:} \\[.15cm] \hline
+Power:&Armor:&Frame:\\[.15cm] \hline
+Sensor:&Fuel:&Capacity:\\[.15cm] \hline
+\multicolumn{3}{l}{Tactical(Drone):}\\[.15cm]\hline
+\multicolumn{3}{l}{Notes:} \\[.15cm]
+\hline \\[.15cm] 
+\hline \\[.15cm]
+\hline \\[.15cm]
+\hline \\[.15cm]
+\hline \\[.15cm]
+\hline \\[.15cm]
+\hline \\[.15cm]
+\end{tabular}
+\end{dossierbox}
+}
+
+
+
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "sixth_world"
+%%% End: 

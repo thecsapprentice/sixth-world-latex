@@ -1,0 +1,138 @@
+\newlength{\pagewidthA}
+\newlength{\pageheightA}
+\setlength{\pagewidthA}{8.5in}
+\setlength{\pageheightA}{11in}
+
+\newlength{\pagewidthB}
+\newlength{\pageheightB}
+\setlength{\pagewidthB}{11in}
+\setlength{\pageheightB}{8.5in}
+
+\newlength{\stockwidth}
+\newlength{\stockheight}
+
+\usepackage{geometry}
+
+% these seem to have NO effect in preamble!
+% geometry first has effect after begin{document}!
+\pdfpagewidth=\pagewidthA \pdfpageheight=\pageheightA % to enforce?
+\paperwidth=\pagewidthA \paperheight=\pageheightA     % for TikZ
+\stockwidth=\pagewidthA \stockheight=\pageheightA % hyperref (memoir)?!
+
+
+\geometry{inner=1cm,outer=1cm,top=1cm,bottom=1cm}
+
+
+\makeatletter
+\newcommand{\printpagevalues}{%
+  % from geometry.sty:
+  * paper: \ifx\Gm@paper\@undefined<default>\else\Gm@paper\fi \\%
+  * layout: \ifGm@layout<custom>\else<same size as paper>\fi \\%
+  \@ifundefined{ifGm@layout}{}{%
+  \ifGm@layout
+  * layout(width,height): (\the\Gm@layoutwidth,\the\Gm@layoutheight) \\%
+  \fi
+  * layoutoffset:(h,v)=(\the\Gm@layouthoffset,\the\Gm@layoutvoffset) \\%
+  }%
+  \pagevalues % from package layouts
+}
+\makeatother
+
+\newcommand{\generatePageLayouts}{%
+  % this command must be called after \begin{document}!
+
+  % geometry needs layoutwidth - cause it ignores the above paper sizes!
+  % layoutwidth=148mm ok, layoutwidth=\paperwidth NOT ok
+  % paperwidth gets reset again internally in newgeometry: in log: *geometry* verbose mode: * layout(width,height): (614.295pt,794.96999pt)
+  % but by using \stockwidth, which here is just a custom length: * layout(width,height): (421.10078pt,597.50787pt)
+
+  \newgeometry{layoutwidth=\pagewidthA,layoutheight=\pageheightA,left=2cm,right=2cm,bottom=2cm,top=2cm}
+  \savegeometry{LayoutPageA}
+
+  \newgeometry{layoutwidth=\pagewidthB,layoutheight=\pageheightB,inner=1cm,outer=1cm,top=1cm,bottom=1cm}
+  \savegeometry{LayoutPageB}
+}
+
+
+\newcommand{\switchToLayoutPageA}{%
+  % doesn't include page sizes; so page size too:
+  \pdfpagewidth=\pagewidthA \pdfpageheight=\pageheightA % for PDF output
+  \paperwidth=\pagewidthA \paperheight=\pageheightA     % for TikZ
+  \stockwidth=\pagewidthA \stockheight=\pageheightA % hyperref (memoir)?!
+  \loadgeometry{LayoutPageA} % note; \loadgeometry may reset paperwidth/h!
+}
+\newcommand{\switchToLayoutPageB}{%
+  % doesn't include page sizes; so page size too:
+  \pdfpagewidth=\pagewidthB \pdfpageheight=\pageheightB % for PDF output
+  \paperwidth=\pagewidthB \paperheight=\pageheightB     % for TikZ
+  \stockwidth=\pagewidthB \stockheight=\pageheightB % hyperref (memoir)?!
+  \loadgeometry{LayoutPageB} % note; \loadgeometry may reset paperwidth/h!
+}
+
+
+
+
+\usepackage{sectsty}
+\usepackage[explicit]{titlesec}
+\usepackage{fancyhdr}
+\usepackage[absolute]{textpos}
+\usepackage{xltxtra,fontspec,xunicode}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont[BoldFont=Shadowrun Bold,ItalicFont=Shadowrun Italic]{Shadowrun}
+\newfontfamily\fatefont{Fate Core Glyphs}
+\newfontfamily\orbitronfont{Orbitron}
+\newfontfamily\oswaldfont{Oswald}
+\newfontfamily\shadowrunfont{Shadowrun}
+\newfontfamily\shadowrunbfont{Shadowrun Bold}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{.2cm}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{0}
+
+
+\usepackage{pdflscape}
+\usepackage{atbegshi}
+\usepackage[svgnames,table]{xcolor} 
+\usepackage{lipsum}
+\usepackage{tabu}
+\usepackage{multicol}
+\usepackage{changepage}
+\usepackage{parcolumns}
+\usepackage{array}
+\usepackage{comment}
+\usepackage{picture}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{layouts}
+%\usepackage{showframe}
+\usepackage{ifthen}
+\usepackage{booktabs}
+\usepackage{multirow}
+\definecolor{lightgray}{gray}{0.90}
+
+\input{dossierhelpers}
+
+\newcommand{\SW}{\textit{Sixth World}}
+\newcommand{\DW}{\textit{Dungeon World}}
+\newcommand{\SR}{\textit{Shadowrun}}
+\newcommand{\tcirc}{\protect{$\bigcirc$}}
+
+\newcommand*\parttitle{}
+\newcommand\invisiblepart[1]{%
+  \refstepcounter{part}%
+  \renewcommand*\parttitle{#1}%
+}
+
+\title{Your Title}
+\author{Your Name}
+\date{}
+
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "sixth_world"
+%%% End: 
