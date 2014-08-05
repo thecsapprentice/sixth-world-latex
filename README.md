@@ -14,7 +14,7 @@ The aim of this project is to port the Sixth World document into LaTeX, allowing
 Requirements
 ------------
 
-Sixth World requires several decorative fonts, so this version is designed to be build with the XeTeX Tex engine.
+Sixth World requires several decorative fonts, so this version is designed to be built with the XeTeX Tex engine.
 
 You can get XeTeX here: http://xetex.sourceforge.net/
 
