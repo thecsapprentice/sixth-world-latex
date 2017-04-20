@@ -70,8 +70,6 @@
 }
 
 
-
-
 \usepackage{sectsty}
 \usepackage[explicit]{titlesec}
 \usepackage{fancyhdr}
@@ -108,20 +106,46 @@
 \usepackage{ifthen}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{tikz}
 \definecolor{lightgray}{gray}{0.90}
 
 \input{dossierhelpers}
 
-\newcommand{\SW}{\textit{Sixth World}}
-\newcommand{\DW}{\textit{Dungeon World}}
-\newcommand{\SR}{\textit{Shadowrun}}
+\def\SW/{\textit{Sixth World}}
+\def\DW/{\textit{Dungeon World}}
+\def\SR/{\textit{Shadowrun}}
 \newcommand{\tcirc}{\protect{$\bigcirc$}}
+\def\oomph/{\textbf{Oomph}}
+\def\twitch/{\textbf{Twitch}}
+\def\mastery/{\textbf{Mastery}}
+\def\flair/{\textbf{Flair}}
+\def\essence/{\textbf{Essence}}
+
+
+\newenvironment{gmtip}%
+{\begin{tcolorbox}[title=GM Tips,sharp corners,rounded
+    corners=downhill,parbox=false]
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{.2cm}
+\noindent
+  }%
+{\end{tcolorbox}}
+
+\newenvironment{dent}%
+{\begin{adjustwidth*}{.5cm}{.5cm}}%
+{\end{adjustwidth*}}
+
 
 \newcommand*\parttitle{}
 \newcommand\invisiblepart[1]{%
   \refstepcounter{part}%
   \renewcommand*\parttitle{#1}%
 }
+
+\newcommand{\movename}[1]{\textbf{\MakeUppercase{#1}}}
+
+\newcommand{\fluff}[1]{\texttt{\textgreater \textgreater \textgreater #1\textless \textless \textless}}
 
 \title{Your Title}
 \author{Your Name}

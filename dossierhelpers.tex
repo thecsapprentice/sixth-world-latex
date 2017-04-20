@@ -6,13 +6,13 @@
 
 \newsavebox{\statBox}
 \savebox{\statBox}
-  (25,25)[bl]{
-     \multiput(0,0)(0,25){2}
-    {\line(1,0){25}}
+(25,25)[bl]{
+  \multiput(0,0)(0,25){2}
+  {\line(1,0){25}}
   \multiput(0,0)(25,0){2}
-    {\line(0,1){25}}
-  \put(20,20){\line(1,0){5}}
-  \put(20,20){\line(0,1){5}}
+  {\line(0,1){25}}
+  %\put(20,20){\line(1,0){5}}
+  %\put(20,20){\line(0,1){5}}
   \put(0,15){\line(1,1){10}}
 }
 
@@ -34,6 +34,16 @@
     {\line(1,0){25}}
   \multiput(0,0)(25,0){2}
     {\line(0,1){25}}
+}
+
+\newsavebox{\optaccumBox}
+\savebox{\optaccumBox}
+(10,10)[bl]{
+  
+  \multiput(0,0)(0,10){2}
+  {\line(1,0){10}}
+  \multiput(0,0)(10,0){2}
+  {\line(0,1){10}}
 }
 
 \newsavebox{\accumBox}
@@ -124,10 +134,10 @@
 \newcommand{\moveoption}[1]{\parbox{\linewidth}{\tcirc{} #1}}
 
 \newsavebox{\dossierstatbarbox}
-\newcommand{\dossierstatbar}[1]{
+\newcommand{\dossierstatbar}{
 \begin{lrbox}{\dossierstatbarbox}
 \begin{minipage}[b][\textheight][t]{.215\textwidth}
-\begin{dossierbox}{5.2cm}{5cm}{#1}
+\begin{dossierbox}{5.2cm}{5cm}{Profile}
 \begin{tabular}{|>{\oswaldfont\fontsize{15pt}{1em}\selectfont\bfseries}m{1.8cm}|m{2.9cm}|}
 \hline
 Street Name& \\[.25cm]\hline
@@ -140,26 +150,17 @@ Look&  \\[1cm]
 \begin{dossierbox}{5.2cm}{6.5cm}{STATS}
 \begin{picture}(5cm,5cm)
 \put( 0cm,4cm){\usebox{\statBox}}
-\put( 1cm,4.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Sluggish}
-\put( 1cm,4.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Awareness }
+\put( 1cm,4.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Oomph }
 \put( 0cm, 3cm){\usebox{\statBox}}
-\put( 1cm,3.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Shaky}
-\put( 1cm,3.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Combat }
+\put( 1cm,3.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Twitch }
 \put( 0cm,2cm){\usebox{\statBox}}
-\put( 1cm,2.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Fragile}
-\put( 1cm,2.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Stamina }
+\put( 1cm,2.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Mastery }
 \put( 0cm,1cm){\usebox{\statBox}}
-\put( 1cm,1.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Dazed}
-\put( 1cm,1.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Craft }
+\put( 1cm,1.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Flair }
 \put( 0cm,0cm){\usebox{\statBox}}
-\put( 1cm,.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Disfigured}
-\put( 1cm,0.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Presence }
-\put( 3cm,4cm){\usebox{\statBoxInf}}
-\put( 4cm,4.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Dulled}
+\put( 1cm,0.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Essence }
+\put( 3cm,4cm){\usebox{\statBoxPlain}}
 \put( 4cm,4.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Edge }
-\put( 3cm,3cm){\usebox{\statBoxInf}}
-\put( 4cm,3.7cm){ \oswaldfont\fontsize{8pt}{1em}\selectfont\bfseries Faded}
-\put( 4cm,3.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Essence }
 \put( 3cm,2cm){\usebox{\statBoxPlain}}
 \put( 4cm,2.1cm){ \oswaldfont\fontsize{16pt}{1em}\selectfont\bfseries Armor }
 \end{picture}
